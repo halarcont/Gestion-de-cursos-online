@@ -19,7 +19,6 @@ public class RequestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RequestEntity createRequest(@RequestBody RequestEntity requestEntity){
-        //todo validaciones
         return requestService.createRequest(requestEntity);
     }
 
@@ -54,7 +53,7 @@ public class RequestController {
         return requestService.list();
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public RequestEntity findById(@PathVariable Long id) {
         return requestService.findById(id);
     }

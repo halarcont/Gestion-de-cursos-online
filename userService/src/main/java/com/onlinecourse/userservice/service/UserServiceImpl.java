@@ -1,8 +1,11 @@
 package com.onlinecourse.userservice.service;
 
 import com.onlinecourse.userservice.entity.UserEntity;
+import com.onlinecourse.userservice.exception.BusinessException;
+import com.onlinecourse.userservice.exception.RequestException;
 import com.onlinecourse.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +19,17 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserEntity createUser(UserEntity userEntity) {
+
+        if(userEntity.getEmail().equals("") || userEntity.getEmail() == null){
+            throw new RequestException("E-401","email is required");
+        }
+        if(userEntity.getUserName().equals("") || userEntity.getUserName() == null){
+            throw new RequestException("E-402","user name is required");
+        }
+        if(userEntity.getEmail().equals("heriberto@gmail.com")){
+            throw new BusinessException("E-300", HttpStatus.INTERNAL_SERVER_ERROR, "email already exists");
+        }
+
         return userRepository.save(userEntity);
     }
 

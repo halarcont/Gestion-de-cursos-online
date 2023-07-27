@@ -12,11 +12,19 @@ import java.util.Optional;
 @Service
 public class CourseServiceImpl implements CourseService{
 
+    private final EventService eventService;
+
     @Autowired
     private CourseRepository courseRepository;
 
+    public CourseServiceImpl(EventService eventService) {
+        this.eventService = eventService;
+    }
+
     @Override
     public CourseEntity create(CourseEntity courseEntity) {
+        System.out.println("Received " + courseEntity);
+        this.eventService.publish(courseEntity);
         courseEntity.setCreatedAt(new Date());
         return courseRepository.save(courseEntity);
     }

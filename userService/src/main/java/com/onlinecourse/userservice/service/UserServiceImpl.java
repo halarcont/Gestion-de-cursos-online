@@ -5,6 +5,7 @@ import com.onlinecourse.userservice.exception.BusinessException;
 import com.onlinecourse.userservice.exception.RequestException;
 import com.onlinecourse.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Cacheable("list")
     public List<UserEntity> list() {
         return (List<UserEntity>) userRepository.findAll();
     }

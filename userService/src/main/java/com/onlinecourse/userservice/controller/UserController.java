@@ -21,7 +21,7 @@ public class UserController {
         return userService.createUser(userEntity);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserEntity updateUser(@RequestBody UserEntity userEntity, @PathVariable String id){
         return userService.updateUser(userEntity, id);

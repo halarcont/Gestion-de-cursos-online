@@ -6,6 +6,8 @@ volumes:
     driver: local
   postgres_data:
     driver: local
+  redis_data:
+    driver: local
 
 services:
   eureka-server:
@@ -32,3 +34,10 @@ services:
       POSTGRES_DB: usersdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data

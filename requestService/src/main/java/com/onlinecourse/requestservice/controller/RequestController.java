@@ -1,5 +1,6 @@
 package com.onlinecourse.requestservice.controller;
 
+import com.onlinecourse.requestservice.client.CourseClientFeign;
 import com.onlinecourse.requestservice.entity.RequestEntity;
 import com.onlinecourse.requestservice.enums.State;
 import com.onlinecourse.requestservice.service.RequestService;
@@ -12,6 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/request")
 public class RequestController {
+
+    @Autowired
+    private CourseClientFeign courseClientFeign;
 
     @Autowired
     private RequestService requestService;

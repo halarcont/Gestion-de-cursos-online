@@ -17,6 +17,8 @@ Otros complementos del proyecto son:
 
 - configServer: acceder las configuraciones centralizadas presentes en el repo serviceConfiguration
 
+- notificatioServer: muestra un mensaje de notificacion cada vez que se cree un curso
+
 #  Requerimientos para ejecutar el proyecto
 
 - tener Docker instalado pues la mayoria de los servicios se desplegan con esa herramienta.

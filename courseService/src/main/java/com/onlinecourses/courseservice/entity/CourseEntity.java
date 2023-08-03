@@ -1,5 +1,6 @@
 package com.onlinecourses.courseservice.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 public class CourseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String courseId;
     private String courseName;
     private String courseType;

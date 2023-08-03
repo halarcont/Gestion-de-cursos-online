@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "9aa4afba-6b91-4204-9249-b7a50dc36e21",
+		"name": "OnlineCourses",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20114351"
+	},
+	"item": [
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "create  course",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseId\": \"2\",\r\n    \"courseName\": \"fisica\",\r\n    \"courseType\": \"ciencias\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:54281/api/courses"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"asd\",\r\n    \"password\": \"asd\",\r\n    \"email\": \"asd@asd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/users"
+					},
+					"response": []
+				},
+				{
+					"name": "listUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"asd\",\r\n    \"password\": \"asd\",\r\n    \"email\": \"asd@asd.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/users"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Request",
+			"item": [
+				{
+					"name": "createRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"personalData\":{\r\n        \"userId\":1,\r\n        \"firstName\":\"asd\",\r\n        \"lastName\":\"asd\"\r\n    },\r\n    \"courseData\":{\r\n        \"courseName\":\"asd\",\r\n        \"description\":\"asdad\",\r\n        \"courseState\":\"Approved\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "Localhost:8080/api/request"
+					},
+					"response": []
+				},
+				{
+					"name": "updateRequest",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"personalData\":{\r\n        \"userId\":1,\r\n        \"firstName\":\"asdfgh\",\r\n        \"lastName\":\"asd\"\r\n    },\r\n    \"courseData\":{\r\n        \"courseName\":\"asd\",\r\n        \"description\":\"asdad\",\r\n        \"courseState\":\"Rejected\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "Localhost:8080/api/request/2"
+					},
+					"response": []
+				},
+				{
+					"name": "listRequest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"personalData\":{\r\n        \"userId\":1,\r\n        \"firstName\":\"asdfgh\",\r\n        \"lastName\":\"asd\"\r\n    },\r\n    \"courseData\":{\r\n        \"courseName\":\"asd\",\r\n        \"description\":\"asdad\",\r\n        \"courseState\":\"Approved\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "Localhost:8080/api/request"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRequest",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"personalData\":{\r\n        \"userId\":1,\r\n        \"firstName\":\"asdfgh\",\r\n        \"lastName\":\"asd\"\r\n    },\r\n    \"courseData\":{\r\n        \"courseName\":\"asd\",\r\n        \"description\":\"asdad\",\r\n        \"courseState\":\"Approved\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "Localhost:8080/api/request/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

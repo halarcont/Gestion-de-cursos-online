@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+.db-data/*
+.logstash/*
+.temp/*
+.pgadmin-data/*

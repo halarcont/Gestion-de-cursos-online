@@ -87,9 +87,6 @@ services:
     networks:
       - elk
 
-networks:
-  elk:
-
   config-server:
     build: ./configServer
     image: configserver-image

@@ -6,7 +6,7 @@ Proyecto multimodulo de microservicios con Spring Boot, Spring Cloud y Docker qu
 
 - userService: microservicio encargado de la gestion de usuarios con un ejemplo sencillo de manejo de excepciones y se usa redis para almacenamiento en cache, se usa Postgresql como base de datos
 
-- courseService: microservicio encargado de la gestion de cursos, se implementa un swagger y se usa una conexion a una base de datos MongoDB
+- courseService: microservicio encargado de la gestion de cursos, se implementa un swagger, es el que se enlaza con el microservicio de notificacion a travez de kafka y se usa una conexion a una base de datos MongoDB
 
 
 Otros complementos del proyecto son:
@@ -16,6 +16,8 @@ Otros complementos del proyecto son:
 - apiGateway: puerta de salida y entrada de las solicitudes
 
 - configServer: acceder las configuraciones centralizadas presentes en el repo serviceConfiguration
+
+- notificatioServer: muestra un mensaje de notificacion cada vez que se cree un curso
 
 #  Requerimientos para ejecutar el proyecto
 

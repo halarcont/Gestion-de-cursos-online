@@ -9,7 +9,7 @@ volumes:
 
 services:
   eureka-server:
-    build: ./eureka-server
+    build: ./eurekaServer
     image: heri96/spring-cloud-gateway-eureka-server
     ports:
       - "8761:8761"

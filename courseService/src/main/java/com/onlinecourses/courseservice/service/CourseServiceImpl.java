@@ -33,7 +33,7 @@ public class CourseServiceImpl implements CourseService{
         this.kafkaTemplate.send("course-topic", JsonUtils.toJson(
                 new CourseEvent(savedCourse.getCourseName(), savedCourse.getCourseType(), CourseStatus.CREATED)
         ));
-        return courseRepository.save(courseEntity);
+        return savedCourse;
     }
 
     /**

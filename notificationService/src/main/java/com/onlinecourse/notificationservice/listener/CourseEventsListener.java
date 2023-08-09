@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class CourseEventsListener {
 
+    /**
+     * clase que se comunica con el topico de cursos para conformar el mensaje de notificacion
+     * @param message
+     */
     @KafkaListener(topics = "course-topic")
     public void handleOrdersNotifications(String message) {
         var courseEvent = JsonUtils.fromJson(message, CourseEvent.class);

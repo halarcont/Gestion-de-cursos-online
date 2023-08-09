@@ -22,7 +22,11 @@ public class CourseServiceImpl implements CourseService{
 
     private final KafkaTemplate<String,String> kafkaTemplate;
 
-
+    /**
+     * metodo encargado de crear los cursos y enviar un mensaje al servicio notificationService de "creado"
+     * @param courseEntity
+     * @return entidad curso creado
+     */
     @Override
     public CourseEntity create(CourseEntity courseEntity) {
         var savedCourse = this.courseRepository.save(courseEntity);
@@ -32,6 +36,12 @@ public class CourseServiceImpl implements CourseService{
         return courseRepository.save(courseEntity);
     }
 
+    /**
+     * metodo que se encarga de la logica detras del metodo modificar curso
+     * @param courseEntity
+     * @param id
+     * @return entidad curso modificado
+     */
     @Override
     public CourseEntity update(CourseEntity courseEntity, String id) {
         Optional<CourseEntity> courseEntityOld = courseRepository.findById(id);
@@ -42,6 +52,10 @@ public class CourseServiceImpl implements CourseService{
         return null;
     }
 
+    /**
+     * metodo que lista los cursos
+     * @return
+     */
     @Override
     public List<CourseEntity> list() {
         return courseRepository.findAll();

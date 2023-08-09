@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * clase que representa los datos de la entidad usuario
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

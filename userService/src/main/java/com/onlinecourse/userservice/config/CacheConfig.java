@@ -11,6 +11,9 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 
 import java.time.Duration;
 
+/**
+ * clase que se encarga de la configuracion de redis para el almacenamiento en cache, por un tiempo limitado
+ */
 @Configuration
 @EnableCaching
 public class CacheConfig {

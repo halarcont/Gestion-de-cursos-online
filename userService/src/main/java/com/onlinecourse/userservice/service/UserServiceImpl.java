@@ -12,13 +12,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * clase que maneja la logica detras de los metodos del controlador
+ */
 @Service
 public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * se crea un usuario siempre y cuando cumpla con las condicionales establecidas, si no, se devuelve una excepcion
+     * @param userEntity
+     * @return
+     */
     @Override
     public UserEntity createUser(UserEntity userEntity) {
 

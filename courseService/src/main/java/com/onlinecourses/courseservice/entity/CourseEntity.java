@@ -11,6 +11,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * clase que representa la entidad curso
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

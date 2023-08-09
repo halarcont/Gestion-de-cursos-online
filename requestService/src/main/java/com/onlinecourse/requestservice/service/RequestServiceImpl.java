@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * clase que maneja la logica de los metodos del controlador
+ */
 @Service
 public class RequestServiceImpl implements RequestService {
 

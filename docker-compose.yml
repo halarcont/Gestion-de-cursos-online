@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 volumes:
   mongodb:
     driver: local
@@ -32,6 +32,7 @@ services:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
+
   keycloak:
     image: quay.io/keycloak/keycloak:legacy
     environment:
@@ -42,8 +43,8 @@ services:
       DB_SCHEMA: public
       DB_PASSWORD: password
       KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: Pa55w0rd
+      KEYCLOAK_PASSWORD: tupassword
     ports:
-      - 9080:8080
+      - 9090:8080
     depends_on:
       - postgres

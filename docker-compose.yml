@@ -9,8 +9,21 @@ volumes:
   redis_data:
     driver: local
   elastic_data: {}
+networks:
+  es-net:
+    driver: bridge
 
 services:
+  user-service:
+    build: ./userService
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
   course-service:
     build: ./courseService
     ports:
@@ -36,9 +49,7 @@ services:
     command: mongod
 
   postgres:
-    image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    image: postgres:latest
     environment:
       POSTGRES_DB: usersdb
       POSTGRES_USER: postgres

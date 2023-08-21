@@ -104,6 +104,7 @@
                 </configuration>
             </plugin>
 
+            <!-- para crear la imagen de docker con el mvn clean install
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
@@ -120,7 +121,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
     <dependencyManagement>

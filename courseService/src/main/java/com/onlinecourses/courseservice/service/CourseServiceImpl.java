@@ -60,8 +60,12 @@ public class CourseServiceImpl implements CourseService{
      */
     @Override
     public List<CourseEntity> list() {
-
+        log.info("hola hola");
+        log.warn("jelou");
+        log.error("jai");
         return courseRepository.findAll();
     }
+
+
 
 }

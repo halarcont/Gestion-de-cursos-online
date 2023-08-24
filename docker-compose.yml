@@ -18,16 +18,24 @@ services:
     build: ./userService
     depends_on:
       - postgres-users
+      - eureka-server
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/usersdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-users:5432/usersdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
 
   course-service:
     build: ./courseService
+    depends_on:
+      - mongodb
+      - eureka-server
+    environment:
+      SPRING_DATA_MONGO_URI: mongodb://courses-mongodb:27017/courses
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
     ports:
       - "8002:8002"
     labels:
@@ -36,7 +44,6 @@ services:
 
   eureka-server:
     build: ./eurekaServer
-    image: heri96/spring-cloud-gateway-eureka-server
     ports:
       - "8761:8761"
 

@@ -6,6 +6,7 @@ import com.onlinecourses.courseservice.events.CourseEvent;
 import com.onlinecourses.courseservice.repository.CourseRepository;
 import com.onlinecourses.courseservice.util.JsonUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CourseServiceImpl implements CourseService{
@@ -58,7 +60,12 @@ public class CourseServiceImpl implements CourseService{
      */
     @Override
     public List<CourseEntity> list() {
+        log.info("hola hola");
+        log.warn("jelou");
+        log.error("jai");
         return courseRepository.findAll();
     }
+
+
 
 }

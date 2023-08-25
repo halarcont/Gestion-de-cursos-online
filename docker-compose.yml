@@ -9,11 +9,41 @@ volumes:
   redis_data:
     driver: local
   elastic_data: {}
+networks:
+  es-net:
+    driver: bridge
 
 services:
+  user-service:
+    build: ./userService
+    depends_on:
+      - postgres-users
+      - eureka-server
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-users:5432/usersdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  course-service:
+    build: ./courseService
+    depends_on:
+      - mongodb
+      - eureka-server
+    environment:
+      SPRING_DATA_MONGO_URI: mongodb://courses-mongodb:27017/courses
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    ports:
+      - "8002:8002"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
   eureka-server:
     build: ./eurekaServer
-    image: heri96/spring-cloud-gateway-eureka-server
     ports:
       - "8761:8761"
 
@@ -27,10 +57,8 @@ services:
       - 27017:27017
     command: mongod
 
-  postgres:
-    image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+  postgres-users:
+    image: postgres:latest
     environment:
       POSTGRES_DB: usersdb
       POSTGRES_USER: postgres
@@ -43,49 +71,45 @@ services:
     volumes:
       - redis_data:/data
 
-  #Elasticsearch:
-   # image: elasticsearch:7.16.2
-    #container_name: elasticsearch
-    #restart: always
-    #volumes:
-     # - elastic_data:/usr/share/elasticsearch/data/
-    #environment:
-     # ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      #discovery.type: single-node
-    #ports:
-     # - '9200:9200'
-      #- '9300:9300'
-    #networks:
-     # - elk
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    ports:
+      - "9200:9200"
+    environment:
+      - "discovery.type=single-node"
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data:rw              # Persistence data
 
-  #Logstash:
-   # image: logstash:7.16.2
-    #container_name: logstash
-    #restart: always
-    #volumes:
-     # - ./logstash/:/logstash_dir
-    #command: logstash -f /logstash_dir/logstash.conf
-    #depends_on:
-     # - Elasticsearch
-    #ports:
-     # - '9600:9600'
-    #environment:
-     # LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    #networks:
-     # - elk
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.2.0
+    ports:
+      - "25826:25826"
+      - "5044:5044"
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro                # Pipeline configuration
+    restart: on-failure
+    depends_on:
+      - elasticsearch
 
-  #Kibana:
-   # image: kibana:7.16.2
-    #container_name: kibana
-    #restart: always
-    #ports:
-#      - '5601:5601'
- #   environment:
-  #    - ELASTICSEARCH_URL=http://elasticsearch:9200
-   # depends_on:
-    #  - Elasticsearch
-#    networks:
-#      - elk
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.2.0
+    ports:
+      - "5601:5601"
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.2.0
+    volumes:
+      - ./filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro # Configuration file
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro           # Docker logs
+      - /var/run/docker.sock:/var/run/docker.sock:ro                       # Additional information about containers
+      - ./filebeat/data:/usr/share/filebeat/data:rw                        # Persistence data
+    user: root                                                             # Allow access to log files and docker.sock
+    restart: on-failure
+    depends_on:
+      - logstash
 
   config-server:
     build: ./configServer

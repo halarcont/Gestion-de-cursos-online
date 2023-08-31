@@ -36,8 +36,18 @@ services:
     environment:
       SPRING_DATA_MONGO_URI: mongodb://courses-mongodb:27017/courses
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  api-gateway:
+    build: ./apiGateway
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
     ports:
-      - "8002:8002"
+      - "8081:8081"
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"

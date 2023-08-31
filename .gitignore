@@ -36,6 +36,5 @@ build/
 .logstash/*
 .temp/*
 .pgadmin-data/*
-.elasticsearch/*
+.elasticsearch/**
 
-elasticsearch/**
